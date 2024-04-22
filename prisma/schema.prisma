@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model jenis_barang {
+  id_jenis   String   @id @db.VarChar(255)
+  nama_jenis String   @db.VarChar(255)
+  barang     barang[]
+}
+
+model karyawan {
+  id_karyawan     String      @id @db.VarChar(255)
+  nama_karyawan   String      @db.VarChar(255)
+  alamat_karyawan String      @db.VarChar(255)
+  pembelian       pembelian[]
+}
+
+model member {
+  id_member     String @id @db.VarChar(255)
+  nama_member   String @db.VarChar(255)
+  alamat_member String @db.VarChar(255)
+}
+
+model merk {
+  id_merk   String   @id @db.VarChar(255)
+  nama_merk String   @db.VarChar(255)
+  barang    barang[]
+}
+
+model pembelian {
+  kode_pembelian  String   @id @db.VarChar(255)
+  total_pembelian String   @db.VarChar(255)
+  tgl_pembelian   DateTime @db.Date
+  kode_pegawai    String   @db.VarChar(255)
+  karyawan        karyawan @relation(fields: [kode_pegawai], references: [id_karyawan], onDelete: NoAction, onUpdate: NoAction, map: "pemb_fk")
+
+  @@index([kode_pegawai], map: "fki_pemb_fk")
+}
+
+model supplier {
+  id_supplier   String   @id @db.VarChar(255)
+  nama_supplier String   @db.VarChar(255)
+  barang        barang[]
+}
+
+model barang {
+  id_barang     String       @id @db.VarChar(255)
+  nama_barang   String       @db.VarChar(255)
+  kode_jenis    String       @db.VarChar(255)
+  kode_merk     String       @db.VarChar(255)
+  kode_supplier String       @db.VarChar(255)
+  jenis_barang  jenis_barang @relation(fields: [kode_jenis], references: [id_jenis], onDelete: NoAction, onUpdate: NoAction, map: "kode_jenis_fk")
+  merk          merk         @relation(fields: [kode_merk], references: [id_merk], onDelete: NoAction, onUpdate: NoAction, map: "kode_merk_fk")
+  supplier      supplier     @relation(fields: [kode_supplier], references: [id_supplier], onDelete: NoAction, onUpdate: NoAction, map: "kode_supplier_fk")
+}

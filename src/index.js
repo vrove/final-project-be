@@ -1,6 +1,5 @@
 const express = require('express');
 const morgan = require('morgan');
-const cors = require('cors');
 const app = express();
 const barangController = require('./barang/barang.controller');
 
@@ -9,29 +8,17 @@ app.use(express.json());
 const hostname = '127.0.0.1'
 const port = 3000
 
-app.use(cors({
-    origin: 'http://localhost:5500',
-    credentials: true
-}));
-
 app.use(morgan('combined'));
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.post('/login', (req, res) => {
-    const {username, password} = req.body
-    res.json(
-        {
-            status: "success",
-            data: {
-                username: username,
-                password: password
-            }
-        }
-    )
-});
 
 app.use('/barang', barangController)
+
+app.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`)
+})
+
 
 //UBAH KE LAYERED ARCHITECTURE, taruh dlu smua dpe endpoints - vin
 //Tambah endpoint-endpoints
@@ -55,7 +42,3 @@ const errorHandling = (err, req, res, next) => {
   })
 }
 app.use(errorHandling)
-
-app.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`)
-})

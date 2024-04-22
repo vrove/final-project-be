@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
             message: 'Barang berhasil ditambahkan'
         });
     } catch (error) {
-        res.status(500).json("Internal Server Error");
+        res.status(500).json(error.message);
     }
 });
 
@@ -41,7 +41,7 @@ router.put('/:id', async (req, res) => {
             message: `Barang dengan id ${idBarang} berhasil diupdate`
         });
     } catch(err){
-        res.status(500).json("Internal Server Error");
+        res.status(500).json(err.message);
     }
 });
 
@@ -56,18 +56,18 @@ router.delete('/:id', async (req, res) => {
             message: `Barang dengan id ${idBarang} berhasil dihapus`
         });
     } catch(err){
-        res.status(500).json("Internal Server Error");
+        res.status(500).json(err.message);
     }
 });
 
 //get barang by id
-router.id('/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const idBarang = parseInt(req.params.id);
     try{
         const student = await getBarangByID(idBarang);
         res.json(student);
     } catch(err){
-        res.status(500).json("Internal Server Error");
+        res.status(500).json(err.message);
     }
 });
 

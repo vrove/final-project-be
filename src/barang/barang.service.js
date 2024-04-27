@@ -6,7 +6,7 @@ const getBarang = async () => {
     return barang;
 };
 
-//add barang
+
 const addBarang = async (newBarangData) => {
     if(!newBarangData.nama_barang){
         throw new Error("Nama barang harus diisi");

@@ -1,0 +1,48 @@
+const prisma = require("../db")
+
+const findKaryawan = async () => {
+    const karyawan = await prisma.karyawan.findMany();
+    return karyawan;
+};
+
+const findKaryawanByID = async (idKaryawan) => {
+    const karyawan = await prisma.karyawan.findUnique({
+        where: {
+            id: idKaryawan
+        }
+    });
+    return karyawan;
+};
+
+const insertKaryawan = async (newKaryawanData) => {
+    const karyawan = await prisma.karyawan.create({
+        data: newKaryawanData
+    });
+    return karyawan;
+};
+
+const editKaryawanByID = async (idKaryawan, newKaryawanData) => {
+    const karyawan = await prisma.karyawan.update({
+        where: {
+            id: idKaryawan
+        },
+        data: newKaryawanData
+    });
+    return karyawan;
+};
+
+const deleteKaryawan = async (idKaryawan) => {
+    const karyawan = await prisma.karyawan.delete({
+        where: {
+            id: idKaryawan
+        }
+    });
+};
+
+module.exports = {
+    findKaryawan,
+    findKaryawanByID,
+    insertKaryawan,
+    editKaryawanByID,
+    deleteKaryawan
+};

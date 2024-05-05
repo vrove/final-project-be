@@ -1,12 +1,12 @@
 const { findBarang, findBarangByID, insertBarang, editBarangByID, deleteBarang } = require('./barang.repository');
 
 //get barang
-const getAllBarang = async () => {
+const getBarang = async () => {
     const barang = await findBarang();
     return barang;
 };
 
-//add barang
+
 const addBarang = async (newBarangData) => {
     if(!newBarangData.nama_barang){
         throw new Error("Nama barang harus diisi");
@@ -18,20 +18,12 @@ const addBarang = async (newBarangData) => {
 
 //update barang by id
 const updateBarangByID = async (idBarang, newBarangData) => {
-    if(typeof id !== 'number'){
-        throw new Error("ID harus berupa angka");
-    }else{
-        const barang = await editBarangByID(idBarang, newBarangData);
-        return barang;
-    }
+    const barang = await editBarangByID(idBarang, newBarangData);
+    return barang;
 };
 
 //delete barang by id
 const deleteBarangByID = async (idBarang) => {
-    if(typeof id !== 'number'){
-        throw new Error("ID harus berupa angka");
-    }
-
     const barang = await findBarangByID(idBarang);
 
     if(!barang){
@@ -43,10 +35,6 @@ const deleteBarangByID = async (idBarang) => {
 
 //get barang by id
 const getBarangByID = async (idBarang) => {
-    if(typeof id !== 'number'){
-        throw new Error("ID harus berupa angka");
-    }
-    
     const barang = await findBarangByID(idBarang);
 
     if(!barang){
@@ -58,7 +46,7 @@ const getBarangByID = async (idBarang) => {
 };
 
 module.exports = {
-    getAllBarang,
+    getBarang,
     addBarang,
     updateBarangByID,
     deleteBarangByID,

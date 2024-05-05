@@ -18,20 +18,12 @@ const addSupplier = async (newSupplierData) => {
 
 //update supplier by id
 const updateSupplierByID = async (idSupplier, newSupplierData) => {
-    if(typeof id !== 'number'){
-        throw new Error("ID harus berupa angka");
-    }else{
-        const supplier = await editSupplierByID(idSupplier, newSupplierData);
-        return supplier;
-    }
+    const supplier = await editSupplierByID(idSupplier, newSupplierData);
+    return supplier;
 };
 
 //delete supplier by id
 const deleteSupplierByID = async (idSupplier) => {
-    if(typeof id !== 'number'){
-        throw new Error("ID harus berupa angka");
-    }
-
     const supplier = await findSupplierByID(idSupplier);
 
     if(!supplier){
@@ -43,10 +35,6 @@ const deleteSupplierByID = async (idSupplier) => {
 
 //get supplier by id
 const getSupplierByID = async (idSupplier) => {
-    if(typeof id !== 'number'){
-        throw new Error("ID harus berupa angka");
-    }
-    
     const supplier = await findSupplierByID(idSupplier);
 
     if(!supplier){

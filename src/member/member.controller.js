@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const newMemberData = req.body;
+        newMemberData.id_member = parseInt(newMemberData.id_member);
         const member = await addMember(newMemberData);
         res.send({
             data: member,
@@ -33,7 +34,7 @@ router.put('/:id', async (req, res) => {
     try{
         const newMemberData = req.body;
         const idMember = parseInt(req.params.id);
-
+        newMemberData.id_member = parseInt(newMemberData.id_member);
         const member = await updateMemberByID(idMember, newMemberData);
 
         res.send({

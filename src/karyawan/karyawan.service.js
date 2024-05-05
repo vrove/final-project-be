@@ -18,20 +18,12 @@ const addKaryawan = async (newKaryawanData) => {
 
 //update karyawan by id
 const updateKaryawanByID = async (idKaryawan, newKaryawanData) => {
-    if (typeof id !== 'number') {
-        throw new Error("ID harus berupa angka");
-    } else {
-        const karyawan = await editKaryawanByID(idKaryawan, newKaryawanData);
-        return karyawan;
-    }
+    const karyawan = await editKaryawanByID(idKaryawan, newKaryawanData);
+    return karyawan;
 };
 
 //delete karyawan by id
 const deleteKaryawanByID = async (idKaryawan) => {
-    if (typeof id !== 'number') {
-        throw new Error("ID harus berupa angka");
-    }
-
     const karyawan = await findKaryawanByID(idKaryawan);
 
     if (!karyawan) {
@@ -43,10 +35,6 @@ const deleteKaryawanByID = async (idKaryawan) => {
 
 //get karyawan by id
 const getKaryawanByID = async (idKaryawan) => {
-    if (typeof id !== 'number') {
-        throw new Error("ID harus berupa angka");
-    }
-    
     const karyawan = await findKaryawanByID(idKaryawan);
 
     if (!karyawan) {

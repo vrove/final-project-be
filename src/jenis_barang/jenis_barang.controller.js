@@ -1,12 +1,12 @@
 const express = require('express');
-const { getJenis_Barang, addJenis_Barang, updateJenis_BarangByID, deleteJenis_BarangByID, getJenis_BarangByID } = require('./jenis_barang.service');
+const { getAllJenis_Barang, addJenis_Barang, updateJenis_BarangByID, deleteJenis_BarangByID, getJenis_BarangByID } = require('./jenis_barang.service');
 
 const router = express.Router();
 
 // Get all jenis_barang
 router.get('/', async (req, res) => {
     try {
-        const jenisBarang = await getJenis_Barang();
+        const jenisBarang = await getAllJenis_Barang();
         res.json(jenisBarang);
     } catch (error) {
         res.status(500).json({ message: "Error fetching jenis_barang: " + error.message });
@@ -17,6 +17,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const newJenisBarang = req.body;
+        newJenisBarang.id_jenis = parseInt(newJenisBarang.id_jenis);
         const jenisBarang = await addJenis_Barang(newJenisBarang);
         res.status(201).json({
             data: jenisBarang,
@@ -32,10 +33,11 @@ router.put('/:id', async (req, res) => {
     try {
         const newJenisBarangData = req.body;
         const idJenisBarang = parseInt(req.params.id);
+        newJenisBarangData.id_jenis = parseInt(newJenisBarangData.id_jenis);
         const updatedJenisBarang = await updateJenis_BarangByID(idJenisBarang, newJenisBarangData);
-        res.json({
+        res.send({
             data: updatedJenisBarang,
-            message: `Jenis barang dengan ID ${idJenisBarang} berhasil diperbarui`
+            message: `Barang dengan id ${idJenisBarang} berhasil diupdate`
         });
     } catch (error) {
         res.status(500).json({ message: "Error updating jenis_barang: " + error.message });
@@ -47,7 +49,7 @@ router.delete('/:id', async (req, res) => {
     const idJenisBarang = parseInt(req.params.id);
     try {
         const deletedJenisBarang = await deleteJenis_BarangByID(idJenisBarang);
-        res.json({
+        res.send({
             data: deletedJenisBarang,
             message: `Jenis barang dengan ID ${idJenisBarang} berhasil dihapus`
         });

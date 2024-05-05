@@ -13,18 +13,18 @@ const findPembelianByID = async (idPembelian) => {
 };
 
 const insertPembelian = async (newPembelianData) => {
-    const pembelian= await prisma.pembelian.create({
+    const pembelian = await prisma.pembelian.create({
         data: {
-            kode_pembelian: newPembelianData.kode_pembelian,
-            total_pembelian: parseInt(newPembelianData.total_pembelian),
-            kode_barang: {
-                connect: { id_jenis: parseInt(newPembelianData.kode_jenis) },
+            total_pembelian: newPembelianData.total_pembelian,
+            tgl_pembelian: new Date(newPembelianData.tgl_pembelian).toISOString(),
+            barang: {
+                connect: { id_barang: newPembelianData.kode_barang },
             },
             karyawan: {
-                connect: { id_karyawan: parseInt(newPembelianData.nama_karyawan) },
+                connect: { id_karyawan: newPembelianData.kode_pegawai },
             },
             member: {
-                connect: { id_member: parseInt(newPembelianData.nama_member) },
+                connect: { id_member: newPembelianData.kode_member },
             },
         },
     });
@@ -35,16 +35,16 @@ const editPembelianByID = async (idPembelian, newPembelianData) => {
     const pembelian = await prisma.pembelian.update({
         where: { kode_pembelian: parseInt(idPembelian) },
         data: {
-            kode_pembelian: newPembelianData.kode_pembelian,
-            total_pembelian: parseInt(newPembelianData.total_pembelian),
-            kode_barang: {
-                connect: { id_jenis: parseInt(newPembelianData.kode_jenis) },
+            total_pembelian: newPembelianData.total_pembelian,
+            tgl_pembelian: new Date(newPembelianData.tgl_pembelian).toISOString(),
+            barang: {
+                connect: { id_barang: newPembelianData.kode_barang },
             },
             karyawan: {
-                connect: { id_karyawan: parseInt(newPembelianData.nama_karyawan) },
+                connect: { id_karyawan: newPembelianData.kode_pegawai },
             },
             member: {
-                connect: { id_member: parseInt(newPembelianData.nama_member) },
+                connect: { id_member: newPembelianData.kode_member },
             },
         },
     });

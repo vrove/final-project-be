@@ -8,12 +8,8 @@ const getMerk = async () => {
 
 
 const addMerk = async (newMerkData) => {
-    if(!newMerkData.nama_Merk){
-        throw new Error("Nama merk barang harus diisi");
-    }else{
-        const merk = await insertMerk(newMerkData);
-        return merk;
-    }
+    const merk = await insertMerk(newMerkData);
+    return merk;
 };
 
 //update Merk barang by id

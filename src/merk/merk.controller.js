@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const newMerkData = req.body;
+        newMerkData.id_merk = parseInt(newMerkData.id_merk);
         const merk = await addMerk(newMerkData);
         res.send({
             data: merk,
@@ -33,7 +34,6 @@ router.put('/:id', async (req, res) => {
     try{
         const newMerkData = req.body;
         const idMerk = parseInt(req.params.id);
-
         const merk = await updateMerkByID(idMerk, newMerkData);
 
         res.send({

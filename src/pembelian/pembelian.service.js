@@ -8,12 +8,8 @@ const getPembelian = async () => {
 
 
 const addPembelian = async (newPembelianData) => {
-    if(!newPembelianData.kode_pembelian){
-        throw new Error("Harap masukkan kode pembelian");
-    }else{
-        const pembelian = await insertPembelian(newPembelianData);
-        return pembelian;
-    }
+    const pembelian = await insertPembelian(newPembelianData);
+    return pembelian;
 };
 
 //update data pembelian by id

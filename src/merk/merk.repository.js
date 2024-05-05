@@ -7,53 +7,29 @@ const findMerk = async () => {
 
 const findMerkByID = async (idMerk) => {
     const merk = await prisma.merk.findUnique({
-        where: { id_barang: idBarang },
+        where: { id_merk: idMerk },
     });
     return merk;
 };
 
 const insertMerk = async (newMerkData) => {
     const merk = await prisma.merk.create({
-        data: {
-            nama_merk: newMerkData.nama_merk,
-            harga_barang: parseInt(newBarangData.harga_barang),
-            jenis_barang: {
-                connect: { id_jenis: parseInt(newMerkData.kode_jenis) },
-            },
-            karyawan: {
-                connect: { id_karyawan: parseInt(newMerkData.kode_karyawan) },
-            },
-            supplier: {
-                connect: { id_supplier: parseInt(newMerkData.kode_supplier) },
-            },
-        },
+        data: newMerkData,
     });
     return merk;
 };
 
 const editMerkByID = async (idMerk, newMerkData) => {
     const merk = await prisma.merk.update({
-        where: { id_Merk: parseInt(idMerk) },
-        data: {
-            nama_merk: newMerkData.nama_merk,
-            harga_barang: parseInt(newBarangData.harga_barang),
-            jenis_barang: {
-                connect: { id_jenis: parseInt(newMerkData.kode_jenis) },
-            },
-            karyawan: {
-                connect: { id_karyawan: parseInt(newMerkData.kode_karyawan) },
-            },
-            supplier: {
-                connect: { id_supplier: parseInt(newMerkData.kode_supplier) },
-            },
-        },
+        where: { id_merk: parseInt(idMerk) },
+        data: newMerkData,
     });
     return merk;
 };
 
 const deleteMerk = async (idMerk) => {
     const merk = await prisma.merk.delete({
-        where: { id_Merk : idMerk },
+        where: { id_merk : idMerk },
     });
     return merk;
 };

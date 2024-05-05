@@ -1,13 +1,13 @@
 const express = require('express');
 
-const {getSupplier, addSupplier, updateSupplierByID, deleteSupplierByID, getSupplierByID} = require('./supplier.service');
+const {getAllSupplier, addSupplier, updateSupplierByID, deleteSupplierByID, getSupplierByID} = require('./supplier.service');
 
 const router = express.Router();
 
 //get semua supplier
 router.get('/', async (req, res) => {
     try {
-        const supplier = await getSupplier();
+        const supplier = await getAllSupplier();
         res.json(supplier);
     } catch (error) {
         res.status(500).json({message: error.message});
@@ -34,14 +34,14 @@ router.put('/:id', async (req, res) => {
         const newSupplierData = req.body;
         const idSupplier = parseInt(req.params.id);
 
-        const supplier = await updateSupplierByID(idBarang, newSupplierData);
+        const supplier = await updateSupplierByID(idSupplier, newSupplierData);
 
         res.send({
             data: supplier,
             message: `Supplier dengan id ${idSupplier} berhasil diupdate`
         });
-    } catch(err){
-        res.status(500).json("Internal Server Error");
+    } catch(error){
+        res.status(500).json({message: error.message});
     }
 });
 
@@ -55,19 +55,19 @@ router.delete('/:id', async (req, res) => {
             data: supplier,
             message: `Supplier dengan id ${idSupplier} berhasil dihapus`
         });
-    } catch(err){
-        res.status(500).json("Internal Server Error");
+    } catch(error){
+        res.status(500).json({message: error.message});
     }
 });
 
 //get supplier by id
-router.id('/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const idSupplier = parseInt(req.params.id);
     try{
         const student = await getSupplierByID(idSupplier);
         res.json(student);
-    } catch(err){
-        res.status(500).json("Internal Server Error");
+    } catch(error){
+        res.status(500).json({message: error.message});
     }
 });
 

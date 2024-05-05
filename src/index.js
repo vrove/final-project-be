@@ -1,7 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
-const barangController = require('./barang/barang.controller');
+const barangController = require('./barang/barang.controller')
+const jenisController = require('./jenis_barang/jenis_barang.controller');
+const karyawanController = require('./karyawan/karyawan.controller')
+const memberController = require('./member/member.controller')
+const merkController = require('./merk/merk.controller')
+const pembelianController = require('./pembelian/pembelian.controller')
+const supplierController = require('./supplier/supplier.controller')
 
 app.use(express.json());
 
@@ -13,7 +19,16 @@ app.use(morgan('combined'));
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-app.use('/barang', barangController)
+//7 endpoint barang, jenis_barang, karyawan, member, merk, pembelian, supplier
+
+app.use('/barang', barangController) //works
+app.use('/jenis_barang', jenisController) //works
+app.use('/karyawan', karyawanController) //works
+app.use('/member', memberController) //works
+app.use('/merk', merkController) //works
+app.use('/pembelian', pembelianController) //works
+app.use('/supplier', supplierController) //works
+
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`)

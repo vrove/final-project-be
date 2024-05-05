@@ -14,19 +14,7 @@ const findMemberByID = async (idMember) => {
 
 const insertMember = async (newMemberData) => {
     const member = await prisma.member.create({
-        data: {
-            nama_member: newMemberData.nama_Member,
-            alamat_member: parseInt(newMemberData.alamat_member),
-            id_member: {
-                connect: { id_jenis: parseInt(newMemberData.kode_jenis) },
-            },
-            merk: {
-                connect: { id_merk: parseInt(newMemberData.kode_merk) },
-            },
-            pembelian: {
-                connect: { id_member: parseInt(newMemberData.kode_member) },
-            },
-        },
+        data: newMemberData,
     });
     return member;
 };
@@ -34,19 +22,7 @@ const insertMember = async (newMemberData) => {
 const editMemberByID = async (idMember, newMemberData) => {
     const member = await prisma.member.update({
         where: { id_member: parseInt(idMember) },
-        data: {
-            nama_member: newMemberData.nama_Member,
-            alamat_member: parseInt(newMemberData.alamat_member),
-            id_member: {
-                connect: { id_jenis: parseInt(newMemberData.kode_jenis) },
-            },
-            merk: {
-                connect: { id_merk: parseInt(newMemberData.kode_merk) },
-            },
-            pembelian: {
-                connect: { id_member: parseInt(newBarangData.kode_member) },
-            },
-        },
+        data: newMemberData,
     });
     return member;
 };

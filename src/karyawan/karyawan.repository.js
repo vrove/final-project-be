@@ -8,7 +8,7 @@ const findKaryawan = async () => {
 const findKaryawanByID = async (idKaryawan) => {
     const karyawan = await prisma.karyawan.findUnique({
         where: {
-            id: idKaryawan
+            id_karyawan: idKaryawan
         }
     });
     return karyawan;
@@ -24,7 +24,7 @@ const insertKaryawan = async (newKaryawanData) => {
 const editKaryawanByID = async (idKaryawan, newKaryawanData) => {
     const karyawan = await prisma.karyawan.update({
         where: {
-            id: idKaryawan
+            id_karyawan: idKaryawan
         },
         data: newKaryawanData
     });
@@ -34,7 +34,7 @@ const editKaryawanByID = async (idKaryawan, newKaryawanData) => {
 const deleteKaryawan = async (idKaryawan) => {
     const karyawan = await prisma.karyawan.delete({
         where: {
-            id: idKaryawan
+            id_karyawan: idKaryawan
         }
     });
 };

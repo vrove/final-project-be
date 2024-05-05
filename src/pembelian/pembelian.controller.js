@@ -18,6 +18,11 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const newPembelianData = req.body;
+        newPembelianData.kode_pembelian = parseInt(newPembelianData.kode_pembelian);
+        newPembelianData.kode_barang = parseInt(newPembelianData.kode_barang);
+        newPembelianData.kode_pegawai = parseInt(newPembelianData.kode_pegawai);
+        newPembelianData.total_pembelian = parseInt(newPembelianData.total_pembelian);
+        newPembelianData.kode_member = parseInt(newPembelianData.kode_member);
         const pembelian = await addPembelian(newPembelianData);
         res.send({
             data: pembelian,
@@ -33,7 +38,11 @@ router.put('/:id', async (req, res) => {
     try{
         const newPembelianData = req.body;
         const idPembelian = parseInt(req.params.id);
-
+        newPembelianData.kode_pembelian = parseInt(newPembelianData.kode_pembelian);
+        newPembelianData.kode_barang = parseInt(newPembelianData.kode_barang);
+        newPembelianData.kode_pegawai = parseInt(newPembelianData.kode_pegawai);
+        newPembelianData.total_pembelian = parseInt(newPembelianData.total_pembelian);
+        newPembelianData.kode_member = parseInt(newPembelianData.kode_member);
         const pembelian = await updatePembelianByID(idPembelian, newPembelianData);
 
         res.send({

@@ -8,12 +8,8 @@ const getMember = async () => {
 
 
 const addMember = async (newMemberData) => {
-    if(!newMemberData.nama_member){
-        throw new Error("Nama member harus diisi");
-    }else{
-        const member = await insertMember(newMemberData);
-        return member;
-    }
+    const member = await insertMember(newMemberData);
+     return member;
 };
 
 //update Member by id

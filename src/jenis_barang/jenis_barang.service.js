@@ -8,7 +8,7 @@ const getAllJenis_Barang = async () => {
 
 // Add jenis_barang
 const addJenis_Barang = async (newJenis_BarangData) => {
-    if (!newJenis_BarangData.nama_jenis_barang) {
+    if (!newJenis_BarangData.nama_jenis) {
         throw new Error("Nama jenis_barang harus diisi");
     } else {
         const jenis_barang = await insertJenis_Barang(newJenis_BarangData);
@@ -17,36 +17,25 @@ const addJenis_Barang = async (newJenis_BarangData) => {
 };
 
 // Update jenis_barang by ID
-const updateJenis_BarangByID = async (idJenis_Barang, newJenis_BarangData) => {
-    if (typeof id !== 'number') {
-        throw new Error("ID harus berupa angka");
-    } else {
-        const jenis_barang = await editJenis_BarangByID(idJenis_Barang, newJenis_BarangData);
-        return jenis_barang;
-    }
+const updateJenis_BarangByID = async (idJenisBarang, newJenis_BarangData) => {
+    const jenis_barang = await editJenis_BarangByID(idJenisBarang, newJenis_BarangData);
+    return jenis_barang;
 };
 
 // Delete jenis_barang by ID
-const deleteJenis_BarangByID = async (idJenis_Barang) => {
-    if (typeof id !== 'number') {
-        throw new Error("ID harus berupa angka");
-    }
-
-    const jenis_barang = await findJenis_BarangByID(idJenis_Barang);
+const deleteJenis_BarangByID = async (idJenisBarang) => {
+    const jenis_barang = await findJenis_BarangByID(idJenisBarang);
 
     if (!jenis_barang) {
-        throw new Error("Jenis_Barang tidak ditemukan");
+        throw new Error("Jenis Barang tidak ditemukan");
     } else {
-        await deleteJenis_Barang(idJenis_Barang);
+        await deleteJenis_Barang(idJenisBarang);
     }
 };
 
+
 // Get jenis_barang by ID
 const getJenis_BarangByID = async (idJenis_Barang) => {
-    if (typeof id !== 'number') {
-        throw new Error("ID harus berupa angka");
-    }
-    
     const jenis_barang = await findJenis_BarangByID(idJenis_Barang);
 
     if (!jenis_barang) {

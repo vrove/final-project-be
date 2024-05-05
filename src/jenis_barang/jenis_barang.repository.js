@@ -8,7 +8,7 @@ const findJenis_Barang = async () => {
 const findJenis_BarangByID = async (idJenis_Barang) => {
     const jenis_barang = await prisma.jenis_barang.findUnique({
         where: {
-            id: idJenis_Barang
+            id_jenis: idJenis_Barang
         }
     });
     return jenis_barang;
@@ -21,23 +21,26 @@ const insertJenis_Barang = async (newJenis_BarangData) => {
     return jenis_barang;
 };
 
-const editJenis_BarangByID = async (idJenis_Barang, newJenis_BarangData) => {
+const editJenis_BarangByID = async (idJenisBarang, newJenisBarangData) => {
     const jenis_barang = await prisma.jenis_barang.update({
         where: {
-            id: idJenis_Barang
+            id_jenis: idJenisBarang
         },
-        data: newJenis_BarangData
+        data: newJenisBarangData
     });
     return jenis_barang;
 };
 
-const deleteJenis_Barang = async (idJenis_Barang) => {
+const deleteJenis_Barang = async (idJenisBarang) => {
     const jenis_barang = await prisma.jenis_barang.delete({
         where: {
-            id: idJenis_Barang
+            id_jenis: idJenisBarang
         }
     });
+    return jenis_barang;
 };
+
+
 
 module.exports = {
     findJenis_Barang,

@@ -1,14 +1,14 @@
 const prisma = require("../db")
 
 const findSupplier = async () => {
-    const supplier = await prisma.barang.findMany();
+    const supplier = await prisma.supplier.findMany();
     return supplier;
 };
 
 const findSupplierByID = async (idSupplier) => {
     const supplier = await prisma.supplier.findUnique({
         where: {
-            id: idSupplier
+            id_supplier: idSupplier
         }
     });
     return supplier;
@@ -24,7 +24,7 @@ const insertSupplier = async (newSupplierData) => {
 const editSupplierByID = async (idSupplier, newSupplierData) => {
     const supplier = await prisma.supplier.update({
         where: {
-            id: idSupplier
+            id_supplier: idSupplier
         },
         data: newSupplierData
     });
@@ -34,7 +34,7 @@ const editSupplierByID = async (idSupplier, newSupplierData) => {
 const deleteSupplier = async (idSupplier) => {
     const supplier = await prisma.supplier.delete({
         where: {
-            id: idSupplier
+            id_supplier: idSupplier
         }
     });
 };
